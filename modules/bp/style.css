@@ -1,0 +1,193 @@
+.bp_card b.cuttext {
+  line-height: 1.8;
+}
+.ggraphs .bp_graph {
+  margin: 10px 10px 1em 10px;
+  position: relative;
+  padding-right: 10px;
+}
+.ggraphs .graph {
+  height: 200px;
+  position: relative;
+  border-color: #aaa;
+  border-style: none none solid solid;
+  margin-left: 30px;
+}
+.ggraphs .graph .bmi_safe,
+.ggraphs .graph .dia_safe,
+.ggraphs .graph .sys_safe {
+  position: absolute;
+  border-style: solid none;
+  border-color: rgba(0, 0, 0, 0.03);
+  left: -10px;
+  right: -5px;
+}
+.ggraphs .graph .sys_safe {
+  background-color: rgba(199, 206, 234, 0.2);
+}
+.ggraphs .graph .dia_safe {
+  background-color: rgba(222, 124, 141, 0.2);
+}
+.ggraphs .graph .bmi_safe {
+  background-color: rgba(0, 150, 0, 0.1);
+}
+.ggraphs .graph .line {
+  position: absolute;
+  border-top-style: solid;
+  border-color: rgba(0, 0, 0, 0.03);
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.ggraphs .graph .item {
+  float: left;
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.ggraphs .label {
+  width: 30px;
+  position: absolute;
+  padding-right: 10px;
+  height: 100%;
+}
+.ggraphs .label span {
+  display: block;
+  text-align: right;
+  line-height: 1;
+  margin-bottom: -0.5em;
+  position: absolute;
+  right: 10px;
+}
+.ggraphs .graph div.bmi,
+.ggraphs .graph div.weight,
+.ggraphs .graph div.pulse,
+.ggraphs .graph div.dia,
+.ggraphs .graph div.sys {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+.ggraphs .graph div.bmi,
+.ggraphs .graph div.weight {
+  width: 2vw;
+  max-width: 70%;
+  transform: translate(-50%, 0);
+}
+.ggraphs .graph div.dia,
+.ggraphs .graph div.sys {
+  width: 2vw;
+  max-width: 40%;
+  transform: translate(-70%, 0);
+}
+.ggraphs .graph div.pulse {
+  width: 1vw;
+  max-width: 20%;
+  transform: translate(70%, 0);
+}
+.ggraphs .pulse,
+.ggraphs .dia,
+.ggraphs .sys {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2) inset;
+}
+.ggraphs .item:hover .bmi,
+.ggraphs .item:hover .weight,
+.ggraphs .item:hover .pulse,
+.ggraphs .item:hover .dia,
+.ggraphs .item:hover .sys {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset;
+}
+.ggraphs .pulse {
+  background-color: rgb(114, 221, 114);
+  color: #000;
+}
+.ggraphs .bmi,
+.ggraphs .dia {
+  background-color: rgba(255, 0, 0, 0.4);
+}
+.ggraphs .dia {
+  color: var(--color);
+}
+.ggraphs .weight,
+.ggraphs .sys {
+  background-color: #C7CEEA;
+  color: #000;
+}
+.ggraphs footer {
+  margin: 0 10px 10px 40px;
+}
+.ggraphs footer span {
+  margin: 10px 10px 0 0;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  padding: 0 10px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  float: left;
+}
+.ggraphs .label span,
+.ggraphs .label_x span {
+  font-size: 50%;
+}
+.ggraphs .label_x span {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  text-align: center;
+}
+.ggraphs .label_x {
+  position: absolute;
+  height: 1em;
+  bottom: -1em;
+  left: 0;
+  right: 0;
+}
+.ggraphs .item span {
+  position: absolute;
+  white-space: nowrap;
+  display: none;
+  text-align: left;
+  font-size: 0.8em;
+  padding: 5px;
+  line-height: 1.3;
+  z-index: 1;
+  left: 100%;
+}
+.ggraphs .item:hover span {
+  display: block;
+}
+.ggraphs .item span.tooltip-left {
+  left: 100%;
+}
+.ggraphs .item span.tooltip-right {
+  left: auto;
+  right: 100%;
+}
+.float_bottom_menu a.bp-record:hover {
+  color: #8BC34A;
+  background-color: #fff;
+}
+.float_bottom_menu a.bp-record {
+  border-color: #8BC34A;
+  background-color: #8BC34A;
+  color: #fff;
+}
+.float_bottom_menu a.bp-history:hover {
+  color: #FF9800;
+  background-color: #fff;
+}
+.float_bottom_menu a.bp-history {
+  border-color: #FF9800;
+  background-color: #FF9800;
+  color: #fff;
+}
+.float_bottom_menu a.bp-report:hover {
+  color: #795548;
+  background-color: #fff;
+}
+.float_bottom_menu a.bp-report {
+  border-color: #795548;
+  background-color: #795548;
+  color: #fff;
+}
