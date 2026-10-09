@@ -1,0 +1,91 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups" data-component="api" data-endpoint="api/bp/care"
+           data-url-params="true" data-url-params-fields="group_id" data-on-load="bpCareLoaded">
+        <header>
+          <div>
+            <h1 class="icon-users" data-i18n>{LNG_Health volunteer mode}</h1>
+            <p><span data-i18n>{LNG_People in your care}</span>: <span data-text="data.summary.total"></span> ·
+               <span data-i18n>{LNG_Records}</span> <span data-i18n>{LNG_this month}</span>: <span data-text="data.records_this_month"></span></p>
+          </div>
+          <div>
+            <span id="bpPendingBadge" class="bp-pending" hidden></span>
+            <a class="btn btn-secondary icon-list" href="/bp-groups" data-i18n>{LNG_Groups}</a>
+            <button type="button" class="btn btn-info icon-export" id="bpCareExport" data-i18n>{LNG_Export}</button>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="ggrid">
+            <div class="block3 large6 stat-card bp-stat-referral" data-if="data.summary.referral > 0">
+              <div class="stat-header icon-warning"><div class="stat-title" data-i18n>{LNG_Refer to a hospital immediately}</div></div>
+              <div class="stat-value bp-red" data-text="data.summary.referral"></div>
+              <div class="stat-change" data-i18n>{LNG_Contact today}</div>
+            </div>
+            <div class="block3 large6 stat-card">
+              <div class="stat-header icon-heart"><div class="stat-title" data-i18n>{LNG_High}</div></div>
+              <div class="stat-value bp-red" data-text="data.summary.high"></div>
+              <div class="stat-change"><span data-i18n>{LNG_Pre-high}</span> <span data-text="data.summary.prehigh"></span></div>
+            </div>
+            <div class="block3 large6 stat-card">
+              <div class="stat-header icon-calendar"><div class="stat-title" data-i18n>{LNG_Not measured recently}</div></div>
+              <div class="stat-value bp-orange" data-text="data.summary.stale"></div>
+              <div class="stat-change"><span data-i18n>{LNG_More than}</span> <span data-text="data.stale_days"></span> <span data-i18n>{LNG_days}</span></div>
+            </div>
+            <div class="block3 large6 stat-card">
+              <div class="stat-header icon-valid"><div class="stat-title" data-i18n>{LNG_Normal}</div></div>
+              <div class="stat-value bp-green" data-text="data.summary.normal"></div>
+              <div class="stat-change"><span data-i18n>{LNG_No consent yet}</span> <span data-text="data.summary.no_consent"></span></div>
+            </div>
+          </div>
+
+          <div class="tablebody">
+            <table class="table border fullwidth">
+              <thead>
+                <tr>
+                  <th data-i18n>{LNG_Name}</th>
+                  <th class="center" data-i18n>{LNG_age}</th>
+                  <th class="center" data-i18n>{LNG_Groups}</th>
+                  <th class="center" data-i18n>{LNG_Latest}</th>
+                  <th class="center" data-i18n>{LNG_Average}</th>
+                  <th class="center">BMI</th>
+                  <th class="center" data-i18n>{LNG_Last measured}</th>
+                  <th class="center"></th>
+                </tr>
+              </thead>
+              <tbody data-for="p in data.people">
+                <template>
+                  <tr>
+                    <td>
+                      <span class="bp-name"><span data-class="p.sex_icon"></span><span data-text="p.name"></span></span>
+                      <span class="bp-flag bp-flag-referral" data-if="p.need_referral" data-i18n>{LNG_Refer to a hospital immediately}</span>
+                      <span class="bp-flag" data-if="!p.has_consent" data-i18n>{LNG_No consent yet}</span>
+                      <span class="bp-chronic" data-if="p.chronic" data-text="p.chronic"></span>
+                    </td>
+                    <td class="center" data-text="p.age"></td>
+                    <td class="center nowrap" data-text="p.group_name || '-'"></td>
+                    <td class="center nowrap" data-class="'bp-' + p.bp_color" data-text="p.bp_text"></td>
+                    <td class="center nowrap" data-class="'bp-' + p.avg_color" data-text="p.avg_text"></td>
+                    <td class="center nowrap" data-class="'bp-' + p.bmi_color" data-text="p.bmi_text"></td>
+                    <td class="center nowrap">
+                      <span data-class="p.stale_class" data-text="p.last_measured_text"></span>
+                    </td>
+                    <td class="center nowrap">
+                      <a class="btn btn-primary icon-new" data-attr="href:p.record_url" data-i18n>{LNG_Record}</a>
+                      <a class="btn btn-warning icon-list" data-attr="href:p.history_url" data-i18n>{LNG_History}</a>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

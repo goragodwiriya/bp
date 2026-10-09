@@ -1,0 +1,96 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <!-- This page does not use data-form: it posts a nested rows[] structure that
+           FormManager does not support, so bpVisitLoaded() in admin.js builds
+           the payload itself. -->
+      <div class="card-groups" data-component="api" data-endpoint="api/bp/visit/get"
+           data-url-params="true" data-url-params-fields="group_id,date" data-on-load="bpVisitLoaded">
+        <header>
+          <div>
+            <h1 class="icon-calendar" data-text="'{LNG_Visit round} ' + data.group.name" data-i18n></h1>
+            <p>
+              <span data-text="data.date"></span> ·
+              <span data-i18n>{LNG_Recorded}</span>
+              <span data-text="data.progress.done"></span>/<span data-text="data.progress.total"></span>
+            </p>
+          </div>
+          <div>
+            <span id="bpPendingBadge" class="bp-pending" hidden></span>
+            <a class="btn btn-secondary icon-list" href="/bp-groups" data-i18n>{LNG_Groups}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="bp-empty" data-if="data.progress.total === 0">
+            <div class="icon-users"></div>
+            <p data-i18n>{LNG_No one in this group yet}</p>
+            <a class="btn btn-primary icon-register" href="/bp-family" data-i18n>{LNG_a family member}</a>
+          </div>
+
+          <form id="bpVisitForm" data-if="data.progress.total > 0" autocomplete="off">
+            <fieldset>
+              <legend data-i18n>{LNG_Tag}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bpv_tag" data-i18n>{LNG_Tag}</label>
+                  <span class="form-control icon-tags">
+                    <!-- data-options-key only binds inside a data-form context. This page is a
+                         data-component="api", so the options are rendered here with
+                         data-for instead. -->
+                    <select id="bpv_tag" name="tag" data-for="t in data.options.tag">
+                      <template>
+                        <option data-attr="value:t.value" data-text="t.text"></option>
+                      </template>
+                    </select>
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="tablebody">
+              <table class="table border fullwidth bp-visit-table">
+                <thead>
+                  <tr>
+                    <th data-i18n>{LNG_Name}</th>
+                    <th class="center" data-i18n>{LNG_Latest}</th>
+                    <th class="center">SYS</th>
+                    <th class="center">DIA</th>
+                    <th class="center" data-i18n>{LNG_Pulse}</th>
+                    <th class="center" data-i18n>{LNG_Weight}</th>
+                  </tr>
+                </thead>
+                <tbody data-for="p in data.people">
+                  <template>
+                    <tr data-attr="data-family-id:p.id">
+                      <td>
+                        <span class="bp-name"><span data-class="p.sex_icon"></span><span data-text="p.name"></span></span>
+                        <span class="bp-flag" data-if="p.done_today" data-i18n>{LNG_Recorded}</span>
+                        <span class="bp-chronic" data-if="p.chronic" data-text="p.chronic"></span>
+                      </td>
+                      <td class="center nowrap" data-class="'bp-' + p.last_bp_color" data-text="p.last_bp"></td>
+                      <td class="center"><input type="number" class="bp-cell" data-role="sys" min="0" max="300" inputmode="numeric"></td>
+                      <td class="center"><input type="number" class="bp-cell" data-role="dia" min="0" max="200" inputmode="numeric"></td>
+                      <td class="center"><input type="number" class="bp-cell" data-role="pulse" min="0" max="300" inputmode="numeric"></td>
+                      <td class="center"><input type="number" class="bp-cell" data-role="weight" step="0.1" min="0" max="500" inputmode="decimal" data-attr="data-height:p.height"></td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+            <div class="comment" data-i18n>{LNG_Leave a row blank if you did not meet that person}</div>
+
+            <fieldset class="submit">
+              <button type="button" class="btn btn-primary icon-save large" id="bpVisitSave" data-i18n>{LNG_Save}</button>
+              <button type="button" class="btn btn-success icon-valid" id="bpVisitFinish" data-i18n>{LNG_Finish round}</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

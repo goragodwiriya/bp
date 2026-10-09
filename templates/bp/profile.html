@@ -1,0 +1,169 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <form data-form="bpProfile" data-validate="true" action="api/bp/profile/save" method="post" data-ajax-submit="true"
+            data-load-api="api/bp/profile/get" data-load-query-params="true" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-profile" data-text="id ? '{LNG_Edit}' : '{LNG_Add}'" data-i18n></h1>
+              <p data-i18n>{LNG_People whose health you record}</p>
+            </div>
+          </header>
+          <div class="content-body">
+            <fieldset>
+              <legend data-i18n>{LNG_Details of} {LNG_a family member}</legend>
+              <div class="form-group">
+                <div class="width60">
+                  <label for="bp_name" data-i18n>{LNG_Name}</label>
+                  <span class="form-control icon-profile">
+                    <input type="text" id="bp_name" name="name" data-attr="value:name" required maxlength="150" autofocus autocomplete="off">
+                  </span>
+                </div>
+                <div class="width33">
+                  <label for="bp_sex" data-i18n>{LNG_Sex}</label>
+                  <span class="form-control icon-sex">
+                    <select id="bp_sex" name="sex" data-options-key="sex" data-attr="value:sex">
+                      <option value="" data-i18n>{LNG_Please select}</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_birthday" data-i18n>{LNG_Birthday}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="date" id="bp_birthday" name="birthday" data-attr="value:birthday">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_height" data-i18n>{LNG_Height}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_height" name="height" step="0.1" min="0" max="300" data-attr="value:height">
+                  </span>
+                  <div class="comment" data-i18n>{LNG_Cm.}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_id_card" data-i18n>{LNG_Identification No.}</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="bp_id_card" name="id_card" maxlength="13" data-attr="value:id_card" inputmode="numeric">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_phone" data-i18n>{LNG_Phone}</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="bp_phone" name="phone" maxlength="32" data-attr="value:phone">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Address}</legend>
+              <div>
+                <label for="bp_address" data-i18n>{LNG_Address}</label>
+                <span class="form-control icon-home">
+                  <input type="text" id="bp_address" name="address" maxlength="150" data-attr="value:address">
+                </span>
+              </div>
+              <div class="form-group">
+                <div class="width33">
+                  <label for="bp_province" data-i18n>{LNG_Province}</label>
+                  <span class="form-control icon-map">
+                    <input type="text" id="bp_province" name="province" maxlength="50" data-attr="value:province">
+                  </span>
+                </div>
+                <div class="width33">
+                  <label for="bp_zipcode" data-i18n>{LNG_Zipcode}</label>
+                  <span class="form-control icon-mail">
+                    <input type="text" id="bp_zipcode" name="zipcode" maxlength="10" data-attr="value:zipcode" inputmode="numeric">
+                  </span>
+                </div>
+                <div class="width25">
+                  <label for="bp_country" data-i18n>{LNG_Country}</label>
+                  <span class="form-control icon-world">
+                    <input type="text" id="bp_country" name="country" maxlength="2" data-attr="value:country">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Health volunteer mode}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_group_id" data-i18n>{LNG_Groups}</label>
+                  <span class="form-control icon-list">
+                    <select id="bp_group_id" name="group_id" data-options-key="group_id" data-attr="value:group_id">
+                      <option value="0" data-i18n>{LNG_Not specified}</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_relation" data-i18n>{LNG_Relation}</label>
+                  <span class="form-control icon-users">
+                    <select id="bp_relation" name="relation" data-options-key="relation" data-attr="value:relation">
+                      <option value="" data-i18n>{LNG_Please select}</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="bp_chronic" data-i18n>{LNG_Chronic disease}</label>
+                <span class="form-control icon-edit">
+                  <input type="text" id="bp_chronic" name="chronic" maxlength="255" data-attr="value:chronic">
+                </span>
+              </div>
+              <div class="form-group">
+                <div class="width33">
+                  <label class="switch">
+                    <input type="checkbox" id="bp_smoking" name="smoking" value="1" data-attr="checked:smoking">
+                    <span data-i18n>{LNG_Smoking}</span>
+                  </label>
+                </div>
+                <div class="width33">
+                  <label class="switch">
+                    <input type="checkbox" id="bp_alcohol" name="alcohol" value="1" data-attr="checked:alcohol">
+                    <span data-i18n>{LNG_Alcohol}</span>
+                  </label>
+                </div>
+                <div class="width33">
+                  <label class="switch">
+                    <input type="checkbox" id="bp_diabetes" name="diabetes" value="1" data-attr="checked:diabetes">
+                    <span data-i18n>{LNG_Diabetes}</span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Consent}</legend>
+              <div>
+                <label class="switch">
+                  <input type="checkbox" id="bp_consent" name="consent" value="1" data-attr="checked:consent">
+                  <span data-i18n>{LNG_Consented to record health data}</span>
+                </label>
+                <div class="comment" data-i18n>{LNG_Health data is sensitive personal data, record it only with the owner's consent}</div>
+              </div>
+              <div>
+                <label class="switch">
+                  <input type="checkbox" id="bp_notify" name="notify_optin" value="1" data-attr="checked:notify_optin">
+                  <span data-i18n>{LNG_Allow health notifications}</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>{LNG_Save}</button>
+              <a class="btn btn-secondary icon-cancel" href="/bp-family" data-i18n>{LNG_Cancel}</a>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

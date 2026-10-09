@@ -1,0 +1,163 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <!-- The offline submit interception is bound at document level in admin.js
+           (bpOfflineSubmit). data-on-load is not used because that hook only
+           runs after the form data loads successfully, which never happens
+           while offline. -->
+      <form data-form="bpRecord" data-validate="true" action="api/bp/record/save" method="post" data-ajax-submit="true" data-load-api="api/bp/record/get"
+            data-load-query-params="true" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-new" data-text="(id ? '{LNG_Edit}' : '{LNG_Record}') + ' ' + name" data-i18n></h1>
+              <p data-i18n>{LNG_Measure 2 times, 1-2 minutes apart}</p>
+            </div>
+          </header>
+          <div class="content-body">
+            <fieldset>
+              <legend data-i18n>{LNG_Blood Pressure}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_sys1" data-i18n>{LNG_1st} {LNG_Systolic}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_sys1" name="sys1" min="0" max="300" inputmode="numeric" data-attr="value:sys1">
+                    <span class="unit">mmHg</span>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_sys2" data-i18n>{LNG_2nd} {LNG_Systolic}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_sys2" name="sys2" min="0" max="300" inputmode="numeric" data-attr="value:sys2">
+                    <span class="unit">mmHg</span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_dia1" data-i18n>{LNG_1st} {LNG_Diastolic}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_dia1" name="dia1" min="0" max="200" inputmode="numeric" data-attr="value:dia1">
+                    <span class="unit">mmHg</span>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_dia2" data-i18n>{LNG_2nd} {LNG_Diastolic}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_dia2" name="dia2" min="0" max="200" inputmode="numeric" data-attr="value:dia2">
+                    <span class="unit">mmHg</span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_pulse1" data-i18n>{LNG_1st} {LNG_Pulse}</label>
+                  <span class="form-control icon-heart">
+                    <input type="number" id="bp_pulse1" name="pulse1" min="0" max="300" inputmode="numeric" data-attr="value:pulse1">
+                    <span class="unit">bpm</span>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_pulse2" data-i18n>{LNG_2nd} {LNG_Pulse}</label>
+                  <span class="form-control icon-heart">
+                    <input type="number" id="bp_pulse2" name="pulse2" min="0" max="300" inputmode="numeric" data-attr="value:pulse2">
+                    <span class="unit">bpm</span>
+                  </span>
+                </div>
+              </div>
+              <div class="comment" data-i18n>{LNG_Fill in all three values of a measurement, or leave the whole row blank}</div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Physical measurement}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_height" data-i18n>{LNG_Height}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_height" name="height" step="0.1" min="0" max="300" data-attr="value:height">
+                    <span class="unit" data-i18n>{LNG_Cm.}</span>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_weight" data-i18n>{LNG_Weight}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_weight" name="weight" step="0.1" min="0" max="500" data-attr="value:weight">
+                    <span class="unit" data-i18n>{LNG_Kg.}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_waist" data-i18n>{LNG_Waist size}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_waist" name="waist" step="0.1" min="0" max="300" data-attr="value:waist">
+                    <span class="unit" data-i18n>{LNG_Cm.}</span>
+                  </span>
+                </div>
+                <div class=" width50">
+                  <label for="bp_temperature" data-i18n>{LNG_Temperature}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_temperature" name="temperature" step="0.1" min="0" max="50" data-attr="value:temperature">
+                    <span class="unit">&#8451;</span>
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Additional measurement}</legend>
+              <div class=" form-group">
+                <div class="width50">
+                  <label for="bp_glucose" data-i18n>{LNG_Blood sugar}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_glucose" name="glucose" step="1" min="0" max="600" inputmode="numeric" data-attr="value:glucose">
+                    <span class="span">mg/dL</span>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_spo2" data-i18n>{LNG_Oxygen saturation}</label>
+                  <span class="form-control icon-edit">
+                    <input type="number" id="bp_spo2" name="spo2" step="1" min="0" max="100" inputmode="numeric" data-attr="value:spo2">
+                    <span class="span">%</span>
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Detail}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bp_create_date" data-i18n>{LNG_Date}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="datetime-local" id="bp_create_date" name="create_date" required data-attr="value:create_date">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="bp_tag" data-i18n>{LNG_Tag}</label>
+                  <span class="form-control icon-tags">
+                    <input type="text" id="bp_tag" name="tag" required data-options-key="tag" data-attr="value:tag">
+                  </span>
+                  <div class="comment" data-i18n>{LNG_Type a new name to create a tag}</div>
+                </div>
+              </div>
+              <div>
+                <label for="bp_note" data-i18n>{LNG_Detail}</label>
+                <span class="form-control icon-edit">
+                  <input type="text" id="bp_note" name="note" maxlength="255" data-attr="value:note">
+                </span>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save large" data-i18n>{LNG_Save}</button>
+              <input type="hidden" name="id" data-attr="value:id">
+              <input type="hidden" name="family_id" data-attr="value:family_id">
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

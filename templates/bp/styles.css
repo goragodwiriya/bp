@@ -1,0 +1,453 @@
+/**
+ * templates/bp/styles.css
+ *
+ * Loaded automatically by index.php when this file exists; no central file
+ * needs editing. Every class is prefixed bp- so it cannot collide with the
+ * core or another module, and all colours come from theme variables so light
+ * and dark mode follow the theme.
+ */
+
+/* ---- Colours by reading level ---- */
+.bp-red {
+  color: var(--color-red, #d32f2f);
+  font-weight: 600;
+}
+
+.bp-orange {
+  color: var(--color-orange, #ef6c00);
+  font-weight: 600;
+}
+
+.bp-green {
+  color: var(--color-green, #2e7d32);
+  font-weight: 600;
+}
+
+.bp-blue {
+  color: var(--color-blue, #1565c0);
+  font-weight: 600;
+}
+
+/* ---- Per-person card on the module home page ---- */
+.bp-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 12px);
+  padding: var(--space-4, 16px);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: var(--border-radius-lg, 8px);
+  background: var(--bg-white, #fff);
+}
+
+.bp-card-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.bp-card-head p {
+  margin: 0;
+  color: var(--color-comment, #757575);
+  font-size: 0.85rem;
+}
+
+.bp-card-body {
+  display: flex;
+  gap: var(--space-4, 16px);
+}
+
+.bp-metric {
+  flex: 1;
+  text-align: center;
+}
+
+.bp-metric-label {
+  color: var(--color-comment, #757575);
+  font-size: 0.8rem;
+}
+
+.bp-metric-value {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.bp-metric-unit {
+  color: var(--color-comment, #757575);
+  font-size: 0.75rem;
+}
+
+.bp-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+}
+
+/* flex:1 alone is not enough: buttons shrink until their labels overlap the
+   next button's icon. min-width plus a basis makes them wrap instead. */
+.bp-card-foot .btn {
+  flex: 1 1 30%;
+  min-width: 6.5rem;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ---- Referral warning banner ---- */
+.bp-alert {
+  padding: var(--space-2, 8px) var(--space-3, 12px);
+  border-radius: var(--border-radius-sm, 4px);
+  border-left: 4px solid var(--color-red, #d32f2f);
+  background: var(--color-warning-light, #fff3e0);
+  color: var(--color-red, #d32f2f);
+  font-weight: 600;
+}
+
+/* ---- Empty state ---- */
+.bp-empty {
+  padding: var(--space-6, 24px);
+  text-align: center;
+  color: var(--color-comment, #757575);
+}
+
+.bp-empty > div[class^='icon-'] {
+  font-size: 3rem;
+  opacity: 0.4;
+}
+
+.bp-empty p {
+  margin: var(--space-3, 12px) 0;
+}
+
+/* ---- Person name in tables (sex icon + name) ---- */
+.bp-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+}
+
+/* ---- Charts ---- */
+.bp-graph {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.bp-period {
+  font-size: 1.1rem;
+}
+
+/* ---- Measuring steps on the how-to page ---- */
+.bp-howto {
+  margin: 0;
+  padding-left: var(--space-5, 20px);
+  line-height: 1.9;
+}
+
+@media (max-width: 640px) {
+  .bp-card-body {
+    flex-direction: column;
+    gap: var(--space-2, 8px);
+  }
+
+  .bp-card-foot .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---- Badge for records stored on this device but not yet synced ---- */
+.bp-pending {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  margin-right: var(--space-2, 8px);
+  padding: 0 var(--space-2, 8px);
+  border-radius: var(--border-radius-full, 999px);
+  background: var(--color-orange, #ef6c00);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.bp-pending[hidden] {
+  display: none;
+}
+
+/* ---- Health volunteer mode ---- */
+.bp-flag {
+  display: inline-block;
+  margin-left: var(--space-2, 8px);
+  padding: 0 var(--space-2, 8px);
+  border-radius: var(--border-radius-sm, 4px);
+  background: var(--bg-secondary, #eee);
+  color: var(--color-comment, #757575);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.bp-flag-referral {
+  background: var(--color-red, #d32f2f);
+  color: #fff;
+  font-weight: 700;
+}
+
+.bp-chronic {
+  display: inline-block;
+  margin-left: var(--space-2, 8px);
+  color: var(--color-comment, #757575);
+  font-size: 0.78rem;
+}
+
+.bp-stat-referral {
+  border: 2px solid var(--color-red, #d32f2f);
+}
+
+/* Inputs in the visit table must be thumb-sized on a phone */
+.bp-visit-table .bp-cell {
+  width: 100%;
+  min-width: 4.5rem;
+  padding: var(--space-2, 8px);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.bp-visit-table td {
+  vertical-align: middle;
+}
+
+/* ==================================================================
+ * Dashboard (route '/')
+ * ================================================================== */
+
+/* Anything needing a hospital comes first and must not be missable */
+.bp-dash-alerts {
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.bp-dash-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, .75rem);
+  padding: var(--space-3, .75rem);
+  margin-bottom: var(--space-2, .5rem);
+  border-radius: var(--radius, 8px);
+  background: #fdecec;
+  border-left: 4px solid #d32f2f;
+  color: #7f1d1d;
+}
+
+.bp-dash-alert .icon-warning {
+  font-size: 1.5rem;
+}
+
+.bp-dash-alert div {
+  flex: 1;
+}
+
+.bp-dash-alert strong {
+  display: block;
+}
+
+.bp-dash-alert em {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ---- Quick record ---- */
+.bp-quick {
+  padding: var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+  border-radius: var(--radius, 8px);
+  background: var(--card-bg, #fff);
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, .1));
+}
+
+.bp-quick h2 {
+  margin: 0 0 var(--space-3, .75rem);
+}
+
+.bp-quick-people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, .5rem);
+  margin-bottom: var(--space-3, .75rem);
+}
+
+/* The radio itself is hidden; the whole chip is the tap target, which needs to
+   stay comfortably above 44px so it can be hit while holding a cuff */
+.bp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  min-height: 44px;
+  padding: .5rem .9rem;
+  border: 2px solid var(--border-color, #ddd);
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bp-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bp-chip small {
+  opacity: .65;
+  font-size: .75rem;
+}
+
+.bp-chip:has(input:checked) {
+  border-color: var(--primary-color, #4f46e5);
+  background: var(--primary-color, #4f46e5);
+  color: #fff;
+}
+
+.bp-chip:has(input:checked) small {
+  opacity: .85;
+}
+
+.bp-chip:has(input:focus-visible) {
+  outline: 2px solid var(--primary-color, #4f46e5);
+  outline-offset: 2px;
+}
+
+/* Already recorded today: still selectable for a second reading, but visibly
+   not the one that needs attention */
+.bp-chip-done {
+  opacity: .6;
+}
+
+.bp-quick-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3, .75rem);
+  margin-bottom: var(--space-3, .75rem);
+}
+
+.bp-quick-fields label {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: .85rem;
+}
+
+/* Big numeric fields: this is filled in one-handed, often by older users */
+.bp-quick-fields input {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.bp-quick-verdict {
+  padding: .6rem .9rem;
+  margin-bottom: var(--space-3, .75rem);
+  border-radius: var(--radius, 8px);
+  font-weight: 600;
+  color: #fff;
+}
+
+.bp-quick-actions {
+  display: flex;
+  gap: var(--space-2, .5rem);
+  flex-wrap: wrap;
+}
+
+/* ตารางของตัวเอง ไม่ใช้ .ggrid ของธีม เพราะธีมกำหนด repeat(12,1fr) ไว้
+   แล้วทับ grid-template-columns ของเราเสมอ ไม่ว่าจะเขียนที่ไหน */
+.bp-dash-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-3, .75rem);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.bp-dash-stats > .stat-card {
+  width: auto;
+  margin: 0;
+}
+
+.bp-card-when {
+  margin: 0 var(--space-3, .75rem) var(--space-2, .5rem);
+  font-size: .8rem;
+  opacity: .7;
+}
+
+.bp-trend {
+  font-size: .8em;
+}
+
+.bp-trend-up {
+  color: #d32f2f;
+}
+
+.bp-trend-down {
+  color: #2e7d32;
+}
+
+/* iOS has no beforeinstallprompt, so the only option is telling the user
+   where the button is */
+.bp-ios-install {
+  position: fixed;
+  left: var(--space-3, .75rem);
+  right: var(--space-3, .75rem);
+  bottom: var(--space-3, .75rem);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, .75rem);
+  padding: var(--space-3, .75rem);
+  border-radius: var(--radius, 8px);
+  background: var(--card-bg, #fff);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+}
+
+.bp-ios-install p {
+  flex: 1;
+  margin: 0;
+}
+
+.bp-ios-install strong {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .bp-quick-fields {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2, .5rem);
+  }
+
+  .bp-quick-fields input {
+    font-size: 1.25rem;
+  }
+
+  .bp-quick-actions .btn {
+    flex: 1;
+  }
+}
+
+/* บนมือถือ การ์ดสถิติ 4 ใบเรียงเต็มความกว้างทีละใบจะต้องเลื่อนยาวมาก
+   กว่าจะถึงรายชื่อคน บังคับ 2 คอลัมน์ให้เห็นครบในหน้าจอเดียว */
+@media (max-width: 640px) {
+  .bp-dash-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2, .5rem);
+  }
+
+  .bp-dash-stats .stat-value {
+    font-size: 1.6rem;
+  }
+
+  .bp-dash-stats .stat-change {
+    font-size: .75rem;
+  }
+}
+
+/* ไอคอนของการ์ดสถิติเป็น ::before ที่ position:absolute right:0 กว้าง 40px
+   หัวข้อยาว ๆ จึงลอดไปอยู่ใต้ไอคอนเมื่อการ์ดแคบลงเป็น 2 คอลัมน์ — กันที่ไว้ให้ */
+.bp-dash-stats .stat-title {
+  padding-right: 46px;
+}

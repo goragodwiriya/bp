@@ -1,0 +1,54 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-list" data-i18n>{LNG_Groups}</h1>
+            <p data-i18n>{LNG_Households or communities you look after}</p>
+          </div>
+          <div>
+            <a class="btn btn-secondary icon-users" href="/bp-care" data-i18n>{LNG_Health volunteer mode}</a>
+            <a class="btn btn-primary icon-register" href="/bp-group?id=0" data-i18n>{LNG_Add}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="bpGroups" data-source="api/bp/groups" data-default-sort="name asc" data-page-size="25"
+                   data-search-columns="name,village" data-show-checkbox="true"
+                   data-actions='{"delete":"Delete"}' data-action-url="api/bp/groups/action" data-action-button="Process|btn-danger"
+                   data-row-actions='{
+                     "visit": {
+                       "title": "{LNG_Visit round}",
+                       "className": "btn btn-primary icon-calendar",
+                       "url": "/bp-visit?group_id={id}",
+                       "navigate": true
+                     },
+                     "edit": {
+                       "title": "{LNG_Edit}",
+                       "className": "btn btn-success icon-edit",
+                       "url": "/bp-group?id={id}",
+                       "navigate": true
+                     }
+                   }'>
+              <thead>
+                <tr>
+                  <th data-field="name" data-sort="name" data-i18n>{LNG_Name}</th>
+                  <th data-field="place" data-sort="village" data-i18n>{LNG_Village}</th>
+                  <th data-field="members" class="center" data-cell-class="center" data-i18n>{LNG_People in your care}</th>
+                  <th data-field="created_text" class="center" data-cell-class="center nowrap" data-sort="created_at" data-i18n>{LNG_Created}</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

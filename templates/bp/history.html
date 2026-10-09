@@ -1,0 +1,56 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-list" data-i18n>{LNG_History} {LNG_Blood Pressure}</h1>
+            <p data-i18n>{LNG_All records in the selected period}</p>
+          </div>
+          <div>
+            <span id="bpPendingBadge" class="bp-pending" hidden></span>
+            <a class="btn btn-primary icon-new" id="bpHistoryRecord" href="/bp-family" data-i18n>{LNG_Record}</a>
+            <a class="btn btn-info icon-stats" id="bpHistoryReport" href="/bp-family" data-i18n>{LNG_Report}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="bpHistory" data-source="api/bp/history" data-default-sort="create_date desc" data-page-size="25"
+                   data-show-checkbox="true" data-actions='{"delete":"Delete"}' data-action-url="api/bp/history/action"
+                   data-action-button="Process|btn-danger" data-on-load="bpHistoryLoaded">
+              <thead>
+                <tr>
+                  <th data-field="date_text" data-sort="create_date" class="nowrap" data-cell-class="nowrap" data-i18n>{LNG_Date}</th>
+                  <th data-field="sys1_text" class="center" data-cell-class="center" data-sort="sys1" data-template="<span class='bp-${sys1_color}'>${sys1_text}</span>">SYS 1</th>
+                  <th data-field="dia1_text" class="center" data-cell-class="center" data-sort="dia1" data-template="<span class='bp-${dia1_color}'>${dia1_text}</span>">DIA 1</th>
+                  <th data-field="pulse1_text" class="center" data-cell-class="center" data-sort="pulse1" data-i18n>{LNG_Pulse} 1</th>
+                  <th data-field="sys2_text" class="center" data-cell-class="center" data-template="<span class='bp-${sys2_color}'>${sys2_text}</span>">SYS 2</th>
+                  <th data-field="dia2_text" class="center" data-cell-class="center" data-template="<span class='bp-${dia2_color}'>${dia2_text}</span>">DIA 2</th>
+                  <th data-field="pulse2_text" class="center" data-cell-class="center" data-i18n>{LNG_Pulse} 2</th>
+                  <th data-field="height_text" class="center" data-cell-class="center nowrap" data-i18n>{LNG_Height}</th>
+                  <th data-field="weight_text" class="center" data-cell-class="center nowrap" data-sort="weight" data-i18n>{LNG_Weight}</th>
+                  <th data-field="bmi_text" class="center" data-cell-class="center nowrap" data-sort="bmi" data-template="<span class='bp-${bmi_color}'>${bmi_text}</span>">BMI</th>
+                  <th data-field="waist_text" class="center" data-cell-class="center nowrap" data-sort="waist" data-i18n>{LNG_Waist size}</th>
+                  <th data-field="temperature_text" class="center" data-cell-class="center nowrap" data-sort="temperature" data-i18n>{LNG_Temperature}</th>
+                  <!-- data-field must be "tag", not "tag_text": TableManager uses it both as
+                       the parameter name sent to the server and as the key for the
+                       filter options. When they disagree it builds options from the
+                       values visible in the column and selects the first one, so the
+                       table arrives already filtered without the user asking. -->
+                  <th data-field="tag" class="center" data-cell-class="center nowrap" data-sort="tag" data-filter="true" data-type="select"
+                      data-show-all="true" data-all-value="" data-template="${tag_text}" data-i18n>{LNG_Tag}</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

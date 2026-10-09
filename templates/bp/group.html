@@ -1,0 +1,64 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <form data-form="bpGroup" data-validate="true" action="api/bp/group/save" method="post" data-ajax-submit="true"
+            data-load-api="api/bp/group/get" data-load-query-params="true" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-list" data-text="id ? '{LNG_Edit}' : '{LNG_Add}'" data-i18n></h1>
+              <p data-i18n>{LNG_Households or communities you look after}</p>
+            </div>
+          </header>
+          <div class="content-body">
+            <fieldset>
+              <legend data-i18n>{LNG_Groups}</legend>
+              <div>
+                <label for="bpg_name" data-i18n>{LNG_Name}</label>
+                <span class="form-control icon-list">
+                  <input type="text" id="bpg_name" name="name" data-attr="value:name" required maxlength="150" autofocus>
+                </span>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="bpg_village" data-i18n>{LNG_Village}</label>
+                  <span class="form-control icon-home">
+                    <input type="text" id="bpg_village" name="village" data-attr="value:village" maxlength="150">
+                  </span>
+                </div>
+                <div class="width25">
+                  <label for="bpg_moo" data-i18n>{LNG_Moo}</label>
+                  <span class="form-control icon-map">
+                    <input type="text" id="bpg_moo" name="moo" data-attr="value:moo" maxlength="10">
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="bpg_address" data-i18n>{LNG_Address}</label>
+                <span class="form-control icon-map">
+                  <input type="text" id="bpg_address" name="address" data-attr="value:address" maxlength="255">
+                </span>
+              </div>
+              <div>
+                <label for="bpg_note" data-i18n>{LNG_Detail}</label>
+                <span class="form-control icon-edit">
+                  <textarea id="bpg_note" name="note" rows="3" data-attr="value:note"></textarea>
+                </span>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>{LNG_Save}</button>
+              <a class="btn btn-secondary icon-cancel" href="/bp-groups" data-i18n>{LNG_Cancel}</a>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

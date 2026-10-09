@@ -1,0 +1,193 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups" data-component="api" data-endpoint="api/bp/home" data-on-load="bpDashboardLoaded">
+
+        <header>
+          <div>
+            <h1 class="icon-heart" data-i18n>{LNG_Today}</h1>
+            <p data-text="data.today.date_text"></p>
+          </div>
+          <div>
+            <span id="bpPendingBadge" class="bp-pending" hidden></span>
+            <button type="button" id="bpInstall" class="btn btn-success icon-download" hidden data-i18n>{LNG_Install app}</button>
+            <a class="btn btn-secondary icon-users" href="/bp-family" data-i18n>{LNG_a family member}</a>
+          </div>
+        </header>
+
+        <div class="content-body">
+
+          <!-- Nobody on the list yet: the only useful thing is to add someone -->
+          <div class="bp-empty" data-if="data.is_empty">
+            <div class="icon-users"></div>
+            <p data-i18n>{LNG_Add the first person to start recording}</p>
+            <a class="btn btn-primary icon-register" href="/bp-profile?id=0" data-i18n>{LNG_Add} {LNG_a family member}</a>
+          </div>
+
+          <div data-if="!data.is_empty">
+
+            <!-- ── Anyone who needs to go to hospital comes before everything else ── -->
+            <div class="bp-dash-alerts" data-if="data.alerts.length > 0">
+              <div data-for="a in data.alerts">
+                <template>
+                  <div class="bp-dash-alert">
+                    <span class="icon-warning"></span>
+                    <div>
+                      <strong data-text="a.name"></strong>
+                      <span data-text="a.text"></span> mmHg
+                      <em data-i18n>{LNG_Refer to a hospital immediately}</em>
+                    </div>
+                    <a class="btn btn-warning icon-list" data-attr="href:a.history_url" data-i18n>{LNG_History}</a>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- ── 1. Record today, without going anywhere ── -->
+            <section class="bp-quick">
+              <h2 class="icon-new" data-i18n>{LNG_Record today}</h2>
+
+              <form data-form="bpQuick" data-validate="true" action="api/bp/record/save" method="post"
+                    data-ajax-submit="true" autocomplete="off">
+                <input type="hidden" name="id" value="0">
+                <input type="hidden" name="tag" value="0">
+                <input type="hidden" name="quick" value="1">
+
+                <!-- Who: chips, because on a phone this beats a select -->
+                <div class="bp-quick-people" data-for="p in data.people">
+                  <template>
+                    <label class="bp-chip" data-class="p.chip_class">
+                      <input type="radio" name="family_id" data-attr="value:p.id" required>
+                      <span data-class="p.sex_icon"></span>
+                      <span data-text="p.name"></span>
+                      <small data-if="p.done_today" data-i18n>{LNG_recorded}</small>
+                      <small data-if="!p.done_today" data-text="p.ago_text"></small>
+                    </label>
+                  </template>
+                </div>
+
+                <div class="bp-quick-fields">
+                  <div>
+                    <label for="q_sys" data-i18n>{LNG_Systolic}</label>
+                    <span class="form-control icon-edit">
+                      <input type="number" id="q_sys" name="sys1" min="0" max="300" inputmode="numeric"
+                             enterkeyhint="next" required placeholder="120">
+                    </span>
+                  </div>
+                  <div>
+                    <label for="q_dia" data-i18n>{LNG_Diastolic}</label>
+                    <span class="form-control icon-edit">
+                      <input type="number" id="q_dia" name="dia1" min="0" max="200" inputmode="numeric"
+                             enterkeyhint="next" required placeholder="80">
+                    </span>
+                  </div>
+                  <div>
+                    <label for="q_pulse" data-i18n>{LNG_Pulse}</label>
+                    <span class="form-control icon-heart">
+                      <!-- required: บันทึกจะเก็บค่าก็ต่อเมื่อมีครบทั้งสามค่า
+                           ถ้าปล่อยให้เว้นได้ แถวจะถูกสร้างแต่ตัวเลขจะหายไปเงียบ ๆ -->
+                      <input type="number" id="q_pulse" name="pulse1" min="0" max="300" inputmode="numeric"
+                             enterkeyhint="done" required placeholder="72">
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Live verdict, so the number means something before saving -->
+                <div class="bp-quick-verdict" id="bpQuickVerdict" hidden></div>
+
+                <div class="bp-quick-actions">
+                  <button type="submit" class="btn btn-primary icon-save" data-i18n>{LNG_Save}</button>
+                  <a class="btn btn-secondary icon-add" id="bpQuickFull" href="/bp-record" data-i18n>{LNG_More fields}</a>
+                </div>
+              </form>
+            </section>
+
+            <!-- ── 2. What is worth knowing ── -->
+            <div class="bp-dash-stats">
+              <div class="block3 large6 stat-card" data-class="data.today.done_class">
+                <div class="stat-header icon-valid">
+                  <div class="stat-title" data-i18n>{LNG_Recorded today}</div>
+                </div>
+                <div class="stat-value"><span data-text="data.today.done"></span>/<span data-text="data.today.total"></span></div>
+                <div class="stat-change" data-if="data.today.all_done" data-i18n>{LNG_Everyone done for today}</div>
+                <div class="stat-change" data-if="!data.today.all_done" data-i18n>{LNG_Someone is still waiting}</div>
+              </div>
+              <div class="block3 large6 stat-card positive">
+                <div class="stat-header icon-calendar">
+                  <div class="stat-title" data-i18n>{LNG_Streak}</div>
+                </div>
+                <div class="stat-value" data-text="data.stats.streak"></div>
+                <div class="stat-change" data-i18n>{LNG_days in a row}</div>
+              </div>
+              <div class="block3 large6 stat-card">
+                <div class="stat-header icon-stats">
+                  <div class="stat-title" data-i18n>{LNG_this month}</div>
+                </div>
+                <div class="stat-value" data-text="data.stats.month_records"></div>
+                <div class="stat-change" data-i18n>{LNG_records}</div>
+              </div>
+              <div class="block3 large6 stat-card">
+                <div class="stat-header icon-users">
+                  <div class="stat-title" data-i18n>{LNG_People you look after}</div>
+                </div>
+                <div class="stat-value" data-text="data.stats.people"></div>
+                <div class="stat-change"><a href="/bp-family" data-i18n>{LNG_Manage}</a></div>
+              </div>
+            </div>
+
+            <!-- ── 3. Everyone's latest reading ── -->
+            <div class="ggrid" data-for="item in data.cards">
+              <template>
+                <section class="block4 large6 bp-card">
+                  <header class="bp-card-head">
+                    <h2><span data-class="item.sex_icon"></span> <span data-text="item.name"></span></h2>
+                    <p data-if="item.age !== ''"><span data-i18n>{LNG_age}</span> <span data-text="item.age"></span> <span data-i18n>{LNG_year}</span></p>
+                  </header>
+                  <div class="bp-card-body">
+                    <div class="bp-metric">
+                      <div class="bp-metric-label" data-i18n>{LNG_Latest}</div>
+                      <div class="bp-metric-value" data-class="'bp-' + item.latest_color" data-text="item.latest_text"></div>
+                      <div class="bp-metric-unit">
+                        mmHg
+                        <span data-if="item.trend === 'up'" class="bp-trend bp-trend-up" title="เพิ่มขึ้น">&#9650;</span>
+                        <span data-if="item.trend === 'down'" class="bp-trend bp-trend-down" title="ลดลง">&#9660;</span>
+                        <span data-if="item.trend === 'same'" class="bp-trend">&ndash;</span>
+                      </div>
+                    </div>
+                    <div class="bp-metric">
+                      <div class="bp-metric-label" data-i18n>{LNG_Average}</div>
+                      <div class="bp-metric-value" data-class="'bp-' + item.bp_color" data-text="item.bp_text"></div>
+                      <div class="bp-metric-unit">BMI <span data-text="item.bmi_text"></span></div>
+                    </div>
+                  </div>
+                  <p class="bp-card-when" data-if="item.last_text !== ''">
+                    <span data-i18n>{LNG_Last measured}</span> <span data-text="item.last_text"></span>
+                  </p>
+                  <footer class="bp-card-foot">
+                    <a class="btn btn-primary icon-new" data-attr="href:item.record_url" data-i18n>{LNG_Record}</a>
+                    <a class="btn btn-warning icon-list" data-attr="href:item.history_url" data-i18n>{LNG_History}</a>
+                    <a class="btn btn-info icon-stats" data-attr="href:item.report_url" data-i18n>{LNG_Report}</a>
+                  </footer>
+                </section>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to install on iOS, where there is no beforeinstallprompt event -->
+      <div id="bpIosInstall" class="bp-ios-install" hidden>
+        <p>
+          <strong data-i18n>{LNG_Install app}</strong>
+          <span data-i18n>{LNG_Tap Share then Add to Home Screen}</span>
+        </p>
+        <button type="button" class="btn btn-secondary" id="bpIosDismiss" data-i18n>{LNG_Close}</button>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>
