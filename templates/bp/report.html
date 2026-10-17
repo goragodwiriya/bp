@@ -1,0 +1,100 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <!-- ApiComponent does not forward the page's query params either, so
+           data-url-params must be enabled; without it api/bp/report is called
+           without an id and answers 404.
+           Do NOT add data-url-params-required: it demands every listed field,
+           not just the necessary ones (from/to/tag are optional). -->
+      <div class="card-groups" data-component="api" data-endpoint="api/bp/report" data-url-params="true" data-url-params-fields="id,from,to,tag" data-on-load="bpReportLoaded">
+        <header>
+          <div>
+            <h1 class="icon-stats" data-text="'{LNG_Report} {LNG_Blood Pressure} ' + data.profile.name" data-i18n></h1>
+            <p>
+              <span data-if="data.profile.age !== ''"><span data-i18n>{LNG_age}</span> <span data-text="data.profile.age"></span> <span data-i18n>{LNG_year}</span> · </span>
+              <span data-i18n>{LNG_Average}</span> <span data-class="'bp-' + data.summary.bp_color" data-text="data.summary.bp_text"></span> mmHg
+            </p>
+          </div>
+          <div>
+            <a class="btn btn-primary icon-new" data-attr="href:'/bp-record?family_id=' + data.profile.id" data-i18n>{LNG_Record}</a>
+            <a class="btn btn-warning icon-list" data-attr="href:'/bp-history?id=' + data.profile.id" data-i18n>{LNG_History}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="ggrid">
+            <div class="block4 large6 stat-card">
+              <div class="stat-header icon-heart">
+                <div class="stat-title" data-i18n>{LNG_Average} {LNG_Blood Pressure}</div>
+              </div>
+              <div class="stat-value" data-class="'bp-' + data.summary.bp_color" data-text="data.summary.bp_text"></div>
+              <div class="stat-change">mmHg · <span data-text="data.summary.count"></span> <span data-i18n>{LNG_Records}</span></div>
+            </div>
+            <div class="block4 large6 stat-card">
+              <div class="stat-header icon-stats">
+                <div class="stat-title">BMI</div>
+              </div>
+              <div class="stat-value" data-class="'bp-' + data.summary.bmi_color" data-text="data.summary.bmi || '-'"></div>
+              <div class="stat-change"><span data-i18n>{LNG_Height}</span> <span data-text="data.profile.height"></span> <span data-i18n>{LNG_Cm.}</span></div>
+            </div>
+            <div class="block4 large6 stat-card">
+              <div class="stat-header icon-calendar">
+                <div class="stat-title" data-i18n>{LNG_Period}</div>
+              </div>
+              <div class="stat-value bp-period"><span data-text="data.params.from" data-format="date"></span></div>
+              <div class="stat-change"><span data-i18n>{LNG_To}</span> <span data-text="data.params.to" data-format="date"></span></div>
+            </div>
+          </div>
+          <section>
+            <h2 data-i18n>{LNG_Blood Pressure} &amp; {LNG_Pulse}</h2>
+            <p class="comment">
+              <span data-i18n>{LNG_Systolic} {LNG_in between}</span>
+              <span data-text="data.bands.sys_min"></span> - <span data-text="data.bands.sys_max"></span> mmHg · <span data-i18n>{LNG_Diastolic} {LNG_in between}</span>
+              <span data-text="data.bands.dia_min"></span> - <span data-text="data.bands.dia_max"></span> mmHg
+            </p>
+            <!-- data-url is set by bpReportLoaded(); GraphComponent does not
+                   forward the page's query params on its own -->
+            <div class="bp-graph" style="height: 380px;" data-component="graph" data-type="line" data-graph-kind="bp"></div>
+          </section>
+          <section>
+            <h2 data-i18n>{LNG_Weight} &amp; BMI</h2>
+            <p class="comment"> BMI <span data-i18n>{LNG_in between}</span> <span data-text="data.bands.bmi_min"></span> - <span data-text="data.bands.bmi_max"></span></p>
+            <div class="bp-graph" style="height: 320px;" data-component="graph" data-type="line" data-graph-kind="weight"></div>
+          </section>
+          <div class="tablebody">
+            <table class="table border fullwidth">
+              <thead>
+                <tr>
+                  <th data-i18n>{LNG_Date}</th>
+                  <th class="center">SYS</th>
+                  <th class="center">DIA</th>
+                  <th class="center" data-i18n>{LNG_Pulse}</th>
+                  <th class="center" data-i18n>{LNG_Weight}</th>
+                  <th class="center">BMI</th>
+                  <th class="center" data-i18n>{LNG_Tag}</th>
+                </tr>
+              </thead>
+              <tbody data-for="row in data.series">
+                <template>
+                  <tr>
+                    <td class="nowrap" data-text="row.date_text"></td>
+                    <td class="center" data-class="'bp-' + row.bp_color" data-text="row.sys || '-'"></td>
+                    <td class="center" data-class="'bp-' + row.bp_color" data-text="row.dia || '-'"></td>
+                    <td class="center" data-text="row.pulse || '-'"></td>
+                    <td class="center" data-text="row.weight || '-'"></td>
+                    <td class="center" data-text="row.bmi || '-'"></td>
+                    <td class="center nowrap" data-text="row.tag_text"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

@@ -1,0 +1,95 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups" data-component="api" data-endpoint="api/bp/home/thresholds">
+        <header>
+          <div>
+            <h1 class="icon-help" data-i18n>{LNG_How to use}</h1>
+            <p data-i18n>{LNG_Reading the numbers and what to do next}</p>
+          </div>
+        </header>
+        <div class="content-body">
+          <fieldset>
+            <legend data-i18n>{LNG_How to measure}</legend>
+            <ol class="bp-howto">
+              <li data-i18n>{LNG_Rest for at least 5 minutes before measuring}</li>
+              <li data-i18n>{LNG_Sit with your back supported and both feet on the floor}</li>
+              <li data-i18n>{LNG_Rest your arm on a table at heart level}</li>
+              <li data-i18n>{LNG_Measure 2 times, 1-2 minutes apart}</li>
+              <li data-i18n>{LNG_Record at the same time every day}</li>
+            </ol>
+          </fieldset>
+
+          <fieldset>
+            <legend data-i18n>{LNG_Blood Pressure}</legend>
+            <div class="tablebody">
+              <table class="table border fullwidth">
+                <thead>
+                  <tr>
+                    <th data-i18n>{LNG_Detail}</th>
+                    <th class="center" data-i18n>{LNG_Systolic}</th>
+                    <th class="center" data-i18n>{LNG_Diastolic}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="bp-blue" data-i18n>{LNG_Low}</span></td>
+                    <td class="center"><span data-i18n>{LNG_Below}</span> <span data-text="data.sys_min"></span></td>
+                    <td class="center"><span data-i18n>{LNG_Below}</span> <span data-text="data.dia_min"></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="bp-green" data-i18n>{LNG_Normal}</span></td>
+                    <td class="center"><span data-text="data.sys_min"></span> - <span data-text="data.sys_max"></span></td>
+                    <td class="center"><span data-text="data.dia_min"></span> - <span data-text="data.dia_max"></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="bp-orange" data-i18n>{LNG_Pre-high}</span></td>
+                    <td class="center"><span data-text="data.sys_max + 1"></span> - <span data-text="data.sys_hight"></span></td>
+                    <td class="center"><span data-text="data.dia_max + 1"></span> - <span data-text="data.dia_hight"></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="bp-red" data-i18n>{LNG_High}</span></td>
+                    <td class="center"><span data-i18n>{LNG_Above}</span> <span data-text="data.sys_hight"></span></td>
+                    <td class="center"><span data-i18n>{LNG_Above}</span> <span data-text="data.dia_hight"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bp-alert">
+              <span data-i18n>{LNG_Refer to a hospital immediately}</span>:
+              <span data-i18n>{LNG_Systolic}</span> &ge; <span data-text="data.referral_sys"></span>
+              <span data-i18n>{LNG_or}</span>
+              <span data-i18n>{LNG_Diastolic}</span> &ge; <span data-text="data.referral_dia"></span> mmHg
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>BMI</legend>
+            <div class="tablebody">
+              <table class="table border fullwidth">
+                <thead>
+                  <tr>
+                    <th data-i18n>{LNG_Detail}</th>
+                    <th class="center">BMI (kg/m&sup2;)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><span class="bp-blue" data-i18n>{LNG_Underweight}</span></td><td class="center" data-i18n>{LNG_Below} 18.5</td></tr>
+                  <tr><td><span class="bp-green" data-i18n>{LNG_Normal}</span></td><td class="center">18.5 - 22.9</td></tr>
+                  <tr><td><span class="bp-orange" data-i18n>{LNG_Overweight}</span></td><td class="center">23 - 24.9</td></tr>
+                  <tr><td><span class="bp-red" data-i18n>{LNG_Obese}</span></td><td class="center" data-i18n>{LNG_Above} 25</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="comment" data-i18n>{LNG_The average shown is calculated from the last} <span data-text="data.avg_days"></span> <span data-i18n>{LNG_days}</span></p>
+          </fieldset>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

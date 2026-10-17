@@ -1,0 +1,76 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-users" data-i18n>{LNG_a family member}</h1>
+            <p data-i18n>{LNG_People whose health you record}</p>
+          </div>
+          <div>
+            <a class="btn btn-primary icon-register" href="/bp-profile?id=0" data-i18n>{LNG_Add}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="bpFamily" data-source="api/bp/family" data-default-sort="name asc" data-page-size="25"
+                   data-search-columns="name,phone,id_card" data-show-checkbox="true" data-actions='{"delete":"Delete"}' data-action-url="api/bp/family/action"
+                   data-action-button="Process|btn-danger" data-row-actions='{
+                     "record": {
+                       "title": "{LNG_Record}",
+                       "className": "btn btn-primary icon-new",
+                       "url": "/bp-record?family_id={id}",
+                       "method": "get",
+                       "navigate": true
+                     },
+                     "history": {
+                       "title": "{LNG_History}",
+                       "className": "btn btn-warning icon-list",
+                       "url": "/bp-history?id={id}",
+                       "method": "get",
+                       "navigate": true
+                     },
+                     "report": {
+                       "title": "{LNG_Report}",
+                       "className": "btn btn-info icon-stats",
+                       "url": "/bp-report?id={id}",
+                       "method": "get",
+                       "navigate": true
+                     },
+                     "edit": {
+                       "title": "{LNG_Edit}",
+                       "className": "btn btn-success icon-edit",
+                       "url": "/bp-profile?id={id}",
+                       "method": "get",
+                       "navigate": true
+                     }
+                   }'>
+              <thead>
+                <tr>
+                  <th data-field="name" data-sort="name" data-template="<span class='bp-name'><span class='${sex_icon}'></span><span>${name}</span></span>" data-i18n>{LNG_Name}
+                  </th>
+                  <th data-field="age" class="center" data-cell-class="center" data-sort="birthday" data-i18n>{LNG_age}</th>
+                  <th data-field="phone" class="center" data-cell-class="center" data-template="<a href='tel:${phone}'>${phone}</a>" data-i18n>{LNG_Phone}</th>
+                  <th data-field="height_text" class="center" data-cell-class="center nowrap" data-sort="height" data-i18n>{LNG_Height}</th>
+                  <th data-field="bp_text" class="center" data-cell-class="center nowrap" data-sort="sys" data-template="<span class='bp-${bp_color}'>${bp_text}</span>" data-i18n>
+                    {LNG_Blood Pressure}</th>
+                  <th data-field="bmi_text" class="center" data-cell-class="center nowrap" data-sort="bmi" data-template="<span class='bp-${bmi_color}'>${bmi_text}</span>">BMI</th>
+                  <th data-field="created_text" class="center" data-cell-class="center nowrap" data-sort="created_at" data-i18n>{LNG_Created}</th>
+                  <th data-field="favorite" class="center" data-cell-class="center" data-sort="favorite"
+                      data-template="<button class='btn-table-action icon-valid' data-action='favorite' data-value='${favorite}' title='{LNG_Favorite}'></button>" data-i18n>
+                    {LNG_Favorite}</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>
