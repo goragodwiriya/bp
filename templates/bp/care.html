@@ -1,0 +1,68 @@
+<div class="card-groups" data-component="api" data-endpoint="api/bp/care" data-url-params="true" data-url-params-fields="group_id" data-on-load="bpCareLoaded">
+  <header>
+    <div>
+      <h1 class="icon-group" data-i18n>{LNG_Health volunteer mode}</h1>
+      <p><span data-i18n>{LNG_People in your care}</span>: <span data-text="data.summary.total"></span> · <span data-i18n>{LNG_Records}</span> <span data-i18n>{LNG_this
+          month}</span>: <span data-text="data.records_this_month"></span></p>
+    </div>
+    <div>
+      <span id="bpPendingBadge" class="bp-pending" hidden></span>
+      <a class="btn icon-list" href="/bp-groups" data-i18n>{LNG_Groups}</a>
+      <button type="button" class="btn icon-export" id="bpCareExport" data-i18n>{LNG_Export}</button>
+    </div>
+  </header>
+  <div class="ggrid">
+    <div class="block3 large6 stat-card bp-stat-referral" data-if="data.summary.referral > 0">
+      <div class="stat-header icon-warning">
+        <div class="stat-title" data-i18n>{LNG_Refer to a hospital immediately}</div>
+      </div>
+      <div class="stat-value bp-red" data-text="data.summary.referral"></div>
+      <div class="stat-change" data-i18n>{LNG_Contact today}</div>
+    </div>
+    <div class="block3 large6 stat-card">
+      <div class="stat-header icon-heart">
+        <div class="stat-title" data-i18n>{LNG_High}</div>
+      </div>
+      <div class="stat-value bp-red" data-text="data.summary.high"></div>
+      <div class="stat-change"><span data-i18n>{LNG_Pre-high}</span> <span data-text="data.summary.prehigh"></span></div>
+    </div>
+    <div class="block3 large6 stat-card">
+      <div class="stat-header icon-calendar">
+        <div class="stat-title" data-i18n>{LNG_Not measured recently}</div>
+      </div>
+      <div class="stat-value bp-orange" data-text="data.summary.stale"></div>
+      <div class="stat-change"><span data-i18n>{LNG_More than}</span> <span data-text="data.stale_days"></span> <span data-i18n>{LNG_days}</span></div>
+    </div>
+    <div class="block3 large6 stat-card">
+      <div class="stat-header icon-valid">
+        <div class="stat-title" data-i18n>{LNG_Normal}</div>
+      </div>
+      <div class="stat-value bp-green" data-text="data.summary.normal"></div>
+      <div class="stat-change"><span data-i18n>{LNG_No consent yet}</span> <span data-text="data.summary.no_consent"></span></div>
+    </div>
+  </div>
+  <section class="content-body">
+    <h2 class="icon-users" data-i18n>People in your care</h2>
+    <div class="tablebody">
+      <table class="table border fullwidth" data-table="bpCarePeople" data-attr="data:people" data-url-params="false" data-show-caption="false">
+        <thead>
+          <tr>
+            <th data-field="name"
+                data-template="<span class='bp-name'><span class='icon-sex-${sex}'></span><span>${name}</span></span><span class='bp-flag bp-flag-referral' data-if='need_referral' data-i18n>{LNG_Refer to a hospital immediately}</span><span class='bp-flag' data-if='!has_consent' data-i18n>{LNG_No consent yet}</span><span class='bp-chronic' data-if='chronic'>${chronic}</span>"
+                data-i18n>{LNG_Name}</th>
+            <th data-field="age" class="center" data-cell-class="center" data-i18n>{LNG_age}</th>
+            <th data-field="group_name" class="center" data-cell-class="center nowrap" data-empty-text="-" data-i18n>{LNG_Groups}</th>
+            <th data-field="bp_text" class="center" data-cell-class="center nowrap" data-template="<span class='bp-${bp_color}'>${bp_text}</span>" data-i18n>{LNG_Latest}</th>
+            <th data-field="avg_text" class="center" data-cell-class="center nowrap" data-template="<span class='bp-${avg_color}'>${avg_text}</span>" data-i18n>{LNG_Average}</th>
+            <th data-field="bmi_text" class="center" data-cell-class="center nowrap" data-template="<span class='bp-${bmi_color}'>${bmi_text}</span>">BMI</th>
+            <th data-field="last_measured" class="center" data-cell-class="center nowrap" data-empty-text="-"
+                data-template="<span data-if='stale' class='bp-orange'>${last_measured|date}</span><span data-if='!stale'>${last_measured|date}</span>" data-i18n>{LNG_Last measured}</th>
+            <th data-field="id" class="center" data-cell-class="center nowrap"
+                data-template="<a class='btn btn-primary icon-new' href='${record_url}' data-i18n>{LNG_Record}</a> <a class='btn btn-warning icon-list' href='${history_url}' data-i18n>{LNG_History}</a>"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</div>
